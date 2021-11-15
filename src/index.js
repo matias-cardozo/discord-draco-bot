@@ -1,4 +1,3 @@
-require('dotenv').config();
 const axios =  require('axios');
 const { Client, Intents, MessageEmbed } = require('discord.js');
 const url = 'https://api.mir4global.com/wallet/prices/draco/lastest';
@@ -10,6 +9,8 @@ const client = new Client({
 });
 
 let draco;
+
+if (process.env.NODE_ENV !== 'PROD') require('dotenv').config()
 
 
 client.on('ready', () => {
