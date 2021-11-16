@@ -25,7 +25,7 @@ client.on('messageCreate', message => {
       let msgTitle = 'Draco';
       let msgText = `$ ${oneDraco}  USD`;
       if (!isNaN(mes[1])) {
-        const dracos =  oneDraco * mes[1];
+        const dracos =  (oneDraco * mes[1]).toFixed(2);
         msgTitle = `${mes[1]} Dracos =`;
         msgText = `$ ${dracos}  USD`;     
       }
