@@ -24,17 +24,17 @@ client.on('messageCreate', message => {
     if (mes[0].toLowerCase() !== '!draco') { return }
     let msgTitle = 'Draco';
     let msgText = `$ ${oneDraco}  USD`;
-    if (isNaN(mes[1])) { return }
-    const dracos =  (oneDraco * mes[1]).toFixed(2);
-    if(dracos === 1) { return };
-    msgTitle = `${mes[1]} Dracos =`;
-    msgText = `$ ${dracos}  USD`;     
+    if (mes.length === 2 && !isNaN(mes[1]) && mes[1] !== '1') {
+      const dracos =  (oneDraco * mes[1]).toFixed(2);
+      msgTitle = `${mes[1]} Dracos =`;
+      msgText = `$ ${dracos}  USD`;      
+    };
     const embed = new MessageEmbed()
       .setColor('RED')
       .addFields(
         { name: (msgTitle), value: msgText},
       );
-      message.channel.send({ embeds: [embed] });         
+    message.channel.send({ embeds: [embed] });         
   } catch (error) {
     console.log(error.message);
   }
