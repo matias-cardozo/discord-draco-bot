@@ -21,21 +21,20 @@ client.on('ready', () => {
 client.on('messageCreate', message => {
   try {
     const mes = message.content.split(' ', 2);
-    if (mes[0].toLowerCase() === '!draco') {
-      let msgTitle = 'Draco';
-      let msgText = `$ ${oneDraco}  USD`;
-      if (!isNaN(mes[1])) {
-        const dracos =  (oneDraco * mes[1]).toFixed(2);
-        msgTitle = `${mes[1]} Dracos =`;
-        msgText = `$ ${dracos}  USD`;     
-      }
-      const embed = new MessageEmbed()
-        .setColor('RED')
-        .addFields(
-          { name: (msgTitle), value: msgText},
-        );
+    if (mes[0].toLowerCase() !== '!draco') { return }
+    let msgTitle = 'Draco';
+    let msgText = `$ ${oneDraco}  USD`;
+    if (isNaN(mes[1])) { return }
+    const dracos =  (oneDraco * mes[1]).toFixed(2);
+    if(dracos === 1) { return };
+    msgTitle = `${mes[1]} Dracos =`;
+    msgText = `$ ${dracos}  USD`;     
+    const embed = new MessageEmbed()
+      .setColor('RED')
+      .addFields(
+        { name: (msgTitle), value: msgText},
+      );
       message.channel.send({ embeds: [embed] });         
-    }
   } catch (error) {
     console.log(error.message);
   }
